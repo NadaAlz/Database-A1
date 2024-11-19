@@ -1,7 +1,6 @@
-from tkinter import *
-
-
 import mysql.connector
+from tkinter import Tk, Label, Entry, Button, END
+
 
 mydb = mysql.connector.connect(
     host = "localhost",
@@ -79,38 +78,6 @@ mycursor = mydb.cursor()
 
 #mydb.commit()
 
-def insert_state():
-    State_ID = state_id_entry.get()
-    StateName = state_name_entry.get()
-
-    try:
-        sql = "INSERT INTO States (state_id, state_name) VALUES (%s, %s)"
-        values = (State_ID, StateName)
-        mycursor.execute(sql, values)
-        mydb.commit()
-        status_label.config(text="State added successfully!", fg="green")
-    except Exception as e:
-        status_label.config(text=f"Error: {e}", fg="red")
-
-    state_id_entry.delete(0, END)
-    state_name_entry.delete(0, END)
 
 
-root = Tk()
-root.title("State Information")
 
-Label(root, text="State_ID:").grid(row=0, column=0, padx=10, pady=10)
-state_id_entry = Entry(root)
-state_id_entry.grid(row=0, column=1, padx=10, pady=10)
-
-Label(root, text="StateName:").grid(row=1, column=0, padx=10, pady=10)
-state_name_entry = Entry(root)
-state_name_entry.grid(row=1, column=1, padx=10, pady=10)
-
-insert_button = Button(root, text="Insert State", command=insert_state)
-insert_button.grid(row=2, column=0, columnspan=2, pady=10)
-
-status_label = Label(root, text="")
-status_label.grid(row=3, column=0, columnspan=2, pady=10)
-
-root.mainloop()
