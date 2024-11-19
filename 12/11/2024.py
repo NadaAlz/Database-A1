@@ -18,28 +18,40 @@ mycursor = mydb.cursor()
 
 #creating tables
 
+#mycursor.execute("CREATE TABLE customers (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), address VARCHAR(255))")
+
+
 #mycursor.execute("CREATE TABLE building (name VARCHAR(50), floors INTEGER(200))")
+
 
 #mycursor.execute("SHOW TABLES")
 
 
+
+
 #for tb in mycursor:
- #   print(tb)
+  # print(tb)
 
  #Inserting values
 
 #sqlFormula = "INSERT INTO building (name, floors) VALUES (%s, %s)"
 #building1 = ("Qamar1",45)
 
+#sqlFormula1 = "INSERT INTO customers (name, address) VALUES (%s, %s)"
+#customer1 = ("Nada", "Muhasinah 1")
+
+
 #mycursor.execute(sqlFormula, building1)
 
+#mycursor.execute(sqlFormula1, customer1)
 #mydb.commit()
 
 #Selecting data
 
-#mycursor.execute("SELECT name FROM building")
+#mycursor.execute("SELECT * FROM customers")
 
-#yresult = mycursor.fetchall()
+
+#myresult = mycursor.fetchall()
 
 #for row in myresult:
  #  print(row)
@@ -72,24 +84,21 @@ def insert_state():
     StateName = state_name_entry.get()
 
     try:
-        # SQL query to insert data
         sql = "INSERT INTO States (state_id, state_name) VALUES (%s, %s)"
-        values = (State_ID, StateName)  # Corrected to use variables from the input fields
+        values = (State_ID, StateName)
         mycursor.execute(sql, values)
         mydb.commit()
         status_label.config(text="State added successfully!", fg="green")
     except Exception as e:
         status_label.config(text=f"Error: {e}", fg="red")
 
-    # Clear the input fields
     state_id_entry.delete(0, END)
     state_name_entry.delete(0, END)
 
-# Create the GUI window
+
 root = Tk()
 root.title("State Information")
 
-# Add labels and entry fields
 Label(root, text="State_ID:").grid(row=0, column=0, padx=10, pady=10)
 state_id_entry = Entry(root)
 state_id_entry.grid(row=0, column=1, padx=10, pady=10)
@@ -98,13 +107,10 @@ Label(root, text="StateName:").grid(row=1, column=0, padx=10, pady=10)
 state_name_entry = Entry(root)
 state_name_entry.grid(row=1, column=1, padx=10, pady=10)
 
-# Add the Insert button
 insert_button = Button(root, text="Insert State", command=insert_state)
 insert_button.grid(row=2, column=0, columnspan=2, pady=10)
 
-# Add a status label for feedback
 status_label = Label(root, text="")
 status_label.grid(row=3, column=0, columnspan=2, pady=10)
 
-# Run the GUI application
 root.mainloop()
