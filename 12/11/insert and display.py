@@ -87,17 +87,6 @@ def update_state():
     state_name_entry.delete(0, END)
 
 
-# Function to display records from another table, e.g., `Cities`
-def display_cities():
-    try:
-        sql = "SELECT * FROM Cities"
-        mycursor.execute(sql)
-        results = mycursor.fetchall()
-        display_box.delete("1.0", END)  # Clear the text box
-        for row in results:
-            display_box.insert(END, f"City_ID: {row[0]}, CityName: {row[1]}\n")
-    except Exception as e:
-        display_box.insert(END, f"Error: {e}\n")
 
 
 # Create the GUI window
@@ -123,8 +112,6 @@ update_button.grid(row=2, column=1, pady=10)
 display_button = Button(root, text="Display States", command=display_states)
 display_button.grid(row=3, column=0, pady=10)
 
-display_cities_button = Button(root, text="Display Cities", command=display_cities)
-display_cities_button.grid(row=3, column=1, pady=10)
 
 # Add a text box to display records
 display_box = Text(root, width=50, height=15)
