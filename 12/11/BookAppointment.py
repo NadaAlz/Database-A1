@@ -1,14 +1,18 @@
-import mysql.connector
-import tkinter as tk
+import mysql.connector #we import the MySQL connector library to connect and interact with the MySQL database
+
+# Import the tkinter library for creating the GUI application
+import tkinter as tk  #We import this library to create the GUI application
 from tkinter import ttk, messagebox
 
-# Database connection
+# These codes are used to establish a connection to the MySQL database
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd="",
-    database="bookappointment"
+    host="localhost",  # We specify the hostname of the database server, which is here is the local machine
+    user="root",       # We specify the username to log into the database, which is the default 'root'
+    passwd="",         # We provided the password for our database user, we did not use a password so we left it empty
+    database="appointsystem"  # We specified the name of the database to connect to, which is our "appointsystem" database
 )
+
+# This is the  cursor object for executing SQL queries and showing results
 mycursor = mydb.cursor()
 
 # Function to view a record by ID
